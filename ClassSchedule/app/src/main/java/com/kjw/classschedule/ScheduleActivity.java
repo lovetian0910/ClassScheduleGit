@@ -1,16 +1,18 @@
 package com.kjw.classschedule;
 
-import android.support.v4.widget.ListViewAutoScrollHelper;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
+import cn.aigestudio.datepicker.cons.DPMode;
+import cn.aigestudio.datepicker.views.DatePicker;
 
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener, ScheduleView{
     private FloatingActionButton mEditButton;
@@ -54,7 +56,22 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void showDatePicker() {
-
+        final AlertDialog dialog = new AlertDialog.Builder(ScheduleActivity.this).create();
+        dialog.show();
+        DatePicker picker = new DatePicker(ScheduleActivity.this);
+        picker.setDate(2016, 9);
+        picker.setMode(DPMode.SINGLE);
+        picker.setOnDatePickedListener(new DatePicker.OnDatePickedListener() {
+            @Override
+            public void onDatePicked(String date) {
+//                Toast.makeText(ScheduleActivity.this, date, Toast.LENGTH_LONG).show();
+//                dialog.dismiss();
+            }
+        });
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setContentView(picker, params);
+        dialog.getWindow().setGravity(Gravity.CENTER);
     }
 
     @Override
