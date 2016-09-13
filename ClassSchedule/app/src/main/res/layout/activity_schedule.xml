@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="前一天"
+            android:text="@string/prev_day"
             android:textSize="12sp"
             android:textColor="@color/clickable_text_color"/>
         <TextView
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:text="后一天"
+            android:text="@string/next_day"
             android:textSize="12sp"
             android:textColor="@color/clickable_text_color"/>
     </RelativeLayout>

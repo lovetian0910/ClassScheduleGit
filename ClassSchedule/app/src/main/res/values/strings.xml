@@ -2,4 +2,6 @@
     <string name="app_name">ClassSchedule</string>
     <string name="menu_edit">编辑当天</string>
     <string name="menu_schedule">排课</string>
+    <string name="next_day">后一天</string>
+    <string name="prev_day">前一天</string>
 </resources>

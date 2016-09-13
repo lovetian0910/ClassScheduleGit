@@ -6,9 +6,11 @@ package com.kjw.classschedule;
 public interface ScheduleView {
     void initViews();
 
-    void showDatePicker();
+    void showDatePicker(int year, int month);
 
-    void changeDate();
+    void changeDate(String date);
+
+    void changeDay(String day);
 
     void updateList();
 

@@ -55,7 +55,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void showDatePicker() {
+    public void showDatePicker(int year, int month) {
         final AlertDialog dialog = new AlertDialog.Builder(ScheduleActivity.this).create();
         dialog.show();
         DatePicker picker = new DatePicker(ScheduleActivity.this);
@@ -64,8 +64,8 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         picker.setOnDatePickedListener(new DatePicker.OnDatePickedListener() {
             @Override
             public void onDatePicked(String date) {
-//                Toast.makeText(ScheduleActivity.this, date, Toast.LENGTH_LONG).show();
-//                dialog.dismiss();
+                mPresenter.changeDate(date);
+                dialog.dismiss();
             }
         });
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
@@ -75,8 +75,13 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void changeDate() {
+    public void changeDate(String date) {
+        mDate.setText(date);
+    }
 
+    @Override
+    public void changeDay(String day) {
+        mDay.setText(day);
     }
 
     @Override
