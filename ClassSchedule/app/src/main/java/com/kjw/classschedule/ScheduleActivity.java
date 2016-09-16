@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 
@@ -22,12 +24,14 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     private TextView mNextDay;
     private TextView mDay;
     private ListView mClassList;
+    private ClassListAdapter mAdapter;
 
     private SchedulePresenter mPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
+        getSupportActionBar().hide();
         mPresenter = new SchedulePresenter(this);
     }
 
@@ -48,6 +52,8 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         mDay.setOnClickListener(this);
 
         mClassList = (ListView)super.findViewById(R.id.main_class_list);
+        mAdapter = new ClassListAdapter(this);
+        mClassList.setAdapter(mAdapter);
     }
     @Override
     public void onClick(View v) {
@@ -85,8 +91,9 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void updateList() {
-
+    public void updateList(List<ClassInfo> classList) {
+        mAdapter.setData(classList);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

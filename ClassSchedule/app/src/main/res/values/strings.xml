@@ -4,4 +4,5 @@
     <string name="menu_schedule">排课</string>
     <string name="next_day">后一天</string>
     <string name="prev_day">前一天</string>
+    <string name="temp">（临时）</string>
 </resources>

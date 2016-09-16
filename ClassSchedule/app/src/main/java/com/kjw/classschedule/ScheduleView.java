@@ -1,5 +1,7 @@
 package com.kjw.classschedule;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/9/11.
  */
@@ -12,7 +14,7 @@ public interface ScheduleView {
 
     void changeDay(String day);
 
-    void updateList();
+    void updateList(List<ClassInfo> classList);
 
     void openEditTodayActivity();
 
