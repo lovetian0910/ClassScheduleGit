@@ -5,4 +5,6 @@
     <string name="next_day">后一天</string>
     <string name="prev_day">前一天</string>
     <string name="temp">（临时）</string>
+    <string name="add">添加课程</string>
+    <string name="save">保存</string>
 </resources>
