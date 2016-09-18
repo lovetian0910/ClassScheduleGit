@@ -15,4 +15,6 @@ public interface ScheduleDataSource {
     boolean hasTempData(int year, int month, int day);
 
     boolean setMainData(ArrayList<ClassInfo> dataList);
+
+    void onDestroy();
 }

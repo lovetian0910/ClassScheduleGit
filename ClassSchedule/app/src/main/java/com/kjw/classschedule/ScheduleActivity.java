@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-import com.kjw.classschedule.edit.MainEditActivity;
+import com.kjw.classschedule.schedule.MainScheduleEditEditActivity;
 
 import java.util.List;
 
@@ -41,6 +41,13 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
             actionBar.hide();
         }
         mPresenter = new SchedulePresenter(this);
+        mPresenter.init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mPresenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -112,7 +119,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void openEditMainActivity() {
-        Intent intent = new Intent(this, MainEditActivity.class);
+        Intent intent = new Intent(this, MainScheduleEditEditActivity.class);
         startActivity(intent);
     }
 

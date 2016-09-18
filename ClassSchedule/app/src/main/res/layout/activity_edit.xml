@@ -39,7 +39,8 @@
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:layout_below="@id/day_layout"
-        android:layout_above="@+id/edit_add_class"></ListView>
+        android:layout_above="@+id/edit_add_class"
+        android:layout_marginTop="10dp"></ListView>
     <Button
         android:id="@+id/edit_add_class"
         android:layout_width="wrap_content"

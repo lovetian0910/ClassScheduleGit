@@ -1,23 +1,32 @@
-package com.kjw.classschedule.edit;
+package com.kjw.classschedule.schedule;
 
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.kjw.classschedule.ClassInfo;
+import com.kjw.classschedule.IPresenter;
 import com.kjw.classschedule.R;
+import com.kjw.classschedule.ScheduleDataSource;
+import com.kjw.classschedule.ScheduleDataSourceImpl;
+
+import java.util.List;
 
 /**
  * Created by jwkuang on 2016/9/18.
  */
-public class EditPresenter implements View.OnClickListener, AdapterView.OnItemSelectedListener{
-    private static String TAG = "EditPresenter";
-
-    private EditView mView;
+public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.OnItemSelectedListener, IPresenter{
+    private static String TAG = "ScheduleEditPresenter";
+    private ScheduleDataSource mDataSource;
+    private ScheduleEditView mView;
     private int mCurrentDay;
-    public EditPresenter(EditView view){
+    public ScheduleEditPresenter(ScheduleEditView view){
         mView = view;
-        mView.initViews();
+        mDataSource = ScheduleDataSourceImpl.getInstance();
     }
 
+    public void init(){
+        mView.initViews();
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -47,10 +56,17 @@ public class EditPresenter implements View.OnClickListener, AdapterView.OnItemSe
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mCurrentDay = position;
+        List<ClassInfo> classInfoList = mDataSource.getDataList(position);
+        mView.updateList(classInfoList);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onDestroy() {
 
     }
 }

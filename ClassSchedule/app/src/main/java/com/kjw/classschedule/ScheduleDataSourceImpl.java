@@ -26,10 +26,19 @@ public class ScheduleDataSourceImpl implements ScheduleDataSource{
     private String TAG = "ScheduleDataSourceImpl";
     private Map<Integer, List<ClassInfo>> mMainScheduleList;
     private AtomicBoolean isDataReady = new AtomicBoolean(false);
-
+    private static ScheduleDataSourceImpl mInstance;
     private final String MAIN_SCHEDULE_DIR = Environment.getExternalStorageDirectory() + File.separator
             + "kjw/ClassSchedule";
     private final String MAIN_SCHEDULE_FILE_PATH = MAIN_SCHEDULE_DIR + File.separator + "MainSchedule.json";
+    public static synchronized ScheduleDataSourceImpl getInstance(){
+        if(mInstance == null){
+            mInstance = new ScheduleDataSourceImpl();
+        }
+        return mInstance;
+    }
+    private ScheduleDataSourceImpl(){
+
+    }
     @Override
     public List<ClassInfo> getDataList(int day) {
         if(!isDataReady.get()){
@@ -131,5 +140,10 @@ public class ScheduleDataSourceImpl implements ScheduleDataSource{
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onDestroy(){
+        mInstance = null;
     }
 }

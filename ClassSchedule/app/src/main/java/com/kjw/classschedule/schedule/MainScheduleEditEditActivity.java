@@ -1,4 +1,4 @@
-package com.kjw.classschedule.edit;
+package com.kjw.classschedule.schedule;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * Created by jwkuang on 2016/9/16.
  */
-public class MainEditActivity extends AppCompatActivity implements EditView{
-    private EditPresenter mPresenter;
+public class MainScheduleEditEditActivity extends AppCompatActivity implements ScheduleEditView {
+    private ScheduleEditPresenter mPresenter;
     private AppCompatSpinner mDay;
     private TextView mPrevDay;
     private TextView mNextDay;
@@ -38,7 +38,8 @@ public class MainEditActivity extends AppCompatActivity implements EditView{
         if(actionBar != null){
             actionBar.hide();
         }
-        mPresenter = new EditPresenter(this);
+        mPresenter = new ScheduleEditPresenter(this);
+        mPresenter.init();
     }
 
     @Override

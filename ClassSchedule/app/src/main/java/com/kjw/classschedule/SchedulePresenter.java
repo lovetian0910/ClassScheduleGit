@@ -15,8 +15,8 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/9/11.
  */
-public class SchedulePresenter {
-    private static final String TAG = "SchedulePresenter";
+public class SchedulePresenter implements IPresenter{
+    private static final String TAG = "ScheduleEditPresenter";
     private ScheduleView mView;
     private ScheduleDataSource mDataSource;
     private int mYear;
@@ -31,11 +31,7 @@ public class SchedulePresenter {
         mFileHandler = new Handler(mFileThread.getLooper());
         mUIHandler = new Handler(Looper.getMainLooper());
         mView = view;
-        mDataSource = new ScheduleDataSourceImpl();
-        mView.initViews();
-        mView.changeDate(initDate());
-        mView.changeDay(calDayString());
-        getData();
+        mDataSource = ScheduleDataSourceImpl.getInstance();
     }
 
     public void changeDate(String dateStr){
@@ -158,5 +154,18 @@ public class SchedulePresenter {
                 });
             }
         });
+    }
+
+    @Override
+    public void init() {
+        mView.initViews();
+        mView.changeDate(initDate());
+        mView.changeDay(calDayString());
+        getData();
+    }
+
+    @Override
+    public void onDestroy() {
+        mDataSource.onDestroy();
     }
 }
