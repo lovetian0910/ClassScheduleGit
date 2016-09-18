@@ -74,8 +74,12 @@ public class SchedulePresenter {
                 nextDay();
                 break;
             case R.id.main_menu_edit:
+                mView.openEditTodayActivity();
+                mView.collapseMenu();
                 break;
             case R.id.main_menu_schedule:
+                mView.openEditMainActivity();
+                mView.collapseMenu();
                 break;
             case R.id.main_day:
                 break;

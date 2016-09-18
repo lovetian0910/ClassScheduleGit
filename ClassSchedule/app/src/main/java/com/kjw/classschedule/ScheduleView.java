@@ -20,4 +20,6 @@ public interface ScheduleView {
 
     void openEditMainActivity();
 
+    void collapseMenu();
+
 }

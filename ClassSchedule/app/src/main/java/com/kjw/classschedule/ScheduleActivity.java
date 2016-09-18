@@ -1,6 +1,8 @@
 package com.kjw.classschedule;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -10,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.kjw.classschedule.edit.MainEditActivity;
 
 import java.util.List;
 
@@ -17,6 +21,7 @@ import cn.aigestudio.datepicker.cons.DPMode;
 import cn.aigestudio.datepicker.views.DatePicker;
 
 public class ScheduleActivity extends AppCompatActivity implements View.OnClickListener, ScheduleView{
+    private FloatingActionsMenu mMenu;
     private FloatingActionButton mEditButton;
     private FloatingActionButton mScheduleButton;
     private TextView mDate;
@@ -31,12 +36,16 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        getSupportActionBar().hide();
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.hide();
+        }
         mPresenter = new SchedulePresenter(this);
     }
 
     @Override
     public void initViews(){
+        mMenu = (FloatingActionsMenu) super.findViewById(R.id.main_menu);
         mEditButton = (FloatingActionButton) super.findViewById(R.id.main_menu_edit);
         mEditButton.setOnClickListener(this);
         mScheduleButton = (FloatingActionButton) super.findViewById(R.id.main_menu_schedule);
@@ -65,7 +74,7 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
         final AlertDialog dialog = new AlertDialog.Builder(ScheduleActivity.this).create();
         dialog.show();
         DatePicker picker = new DatePicker(ScheduleActivity.this);
-        picker.setDate(2016, 9);
+        picker.setDate(year, month);
         picker.setMode(DPMode.SINGLE);
         picker.setOnDatePickedListener(new DatePicker.OnDatePickedListener() {
             @Override
@@ -103,6 +112,12 @@ public class ScheduleActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void openEditMainActivity() {
+        Intent intent = new Intent(this, MainEditActivity.class);
+        startActivity(intent);
+    }
 
+    @Override
+    public void collapseMenu() {
+        mMenu.collapse();
     }
 }
