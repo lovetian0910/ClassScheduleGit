@@ -1,5 +1,6 @@
 package com.kjw.classschedule.schedule;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.kjw.classschedule.ClassInfo;
 import com.kjw.classschedule.ClassListAdapter;
 import com.kjw.classschedule.R;
+import com.kjw.classschedule.edit.EditClassInfoActivity;
 import com.kjw.classschedule.util.Constants;
 
 import java.util.List;
@@ -43,6 +45,13 @@ public class MainScheduleEditEditActivity extends AppCompatActivity implements S
     }
 
     @Override
+    protected void onDestroy() {
+        mPresenter.onDestroy();
+        mPresenter = null;
+        super.onDestroy();
+    }
+
+    @Override
     public void initViews() {
         mDay = (AppCompatSpinner) super.findViewById(R.id.edit_day);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Constants.DAYS_IN_CHN);
@@ -56,6 +65,7 @@ public class MainScheduleEditEditActivity extends AppCompatActivity implements S
         mList = (ListView) super.findViewById(R.id.edit_list);
         mAdapter = new ClassListAdapter(this);
         mList.setAdapter(mAdapter);
+        mList.setOnItemClickListener(mPresenter);
         mAddButton = (Button) super.findViewById(R.id.edit_add_class);
         mAddButton.setOnClickListener(mPresenter);
         mSaveButton = (Button) super.findViewById(R.id.edit_save);
@@ -71,5 +81,13 @@ public class MainScheduleEditEditActivity extends AppCompatActivity implements S
     public void updateList(List<ClassInfo> classList) {
         mAdapter.setData(classList);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void openEditClassActivity(int day, int index) {
+        Intent intent = new Intent(this, EditClassInfoActivity.class);
+        intent.putExtra("day", day);
+        intent.putExtra("index", index);
+        startActivity(intent);
     }
 }

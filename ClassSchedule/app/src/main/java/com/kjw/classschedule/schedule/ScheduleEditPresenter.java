@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by jwkuang on 2016/9/18.
  */
-public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.OnItemSelectedListener, IPresenter{
+public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.OnItemSelectedListener, IPresenter, AdapterView.OnItemClickListener{
     private static String TAG = "ScheduleEditPresenter";
     private ScheduleDataSource mDataSource;
     private ScheduleEditView mView;
@@ -67,6 +67,12 @@ public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.
 
     @Override
     public void onDestroy() {
+        mDataSource = null;
+        mView = null;
+    }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        mView.openEditClassActivity(mCurrentDay, i);
     }
 }

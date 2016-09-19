@@ -13,4 +13,6 @@ public interface ScheduleEditView {
     void changeDay(int day);
 
     void updateList(List<ClassInfo> classList);
+
+    void openEditClassActivity(int day, int index);
 }
