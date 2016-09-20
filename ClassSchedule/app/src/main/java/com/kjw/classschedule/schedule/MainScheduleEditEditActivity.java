@@ -52,6 +52,12 @@ public class MainScheduleEditEditActivity extends AppCompatActivity implements S
     }
 
     @Override
+    protected void onResume() {
+        mPresenter.onResume();
+        super.onResume();
+    }
+
+    @Override
     public void initViews() {
         mDay = (AppCompatSpinner) super.findViewById(R.id.edit_day);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Constants.DAYS_IN_CHN);

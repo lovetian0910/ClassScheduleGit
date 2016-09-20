@@ -20,4 +20,6 @@ public interface EditClassInfoView {
 
     String getName();
     String getDuration();
+
+    void close();
 }

@@ -74,7 +74,7 @@ public class EditClassInfoActivity extends AppCompatActivity implements EditClas
 
     @Override
     public void setDuration(int duration) {
-        mDuration.setText(duration);
+        mDuration.setText(String.valueOf(duration));
     }
 
     @Override
@@ -90,6 +90,11 @@ public class EditClassInfoActivity extends AppCompatActivity implements EditClas
     @Override
     public String getDuration() {
         return mDuration.getText().toString();
+    }
+
+    @Override
+    public void close() {
+        finish();
     }
 
     @Override

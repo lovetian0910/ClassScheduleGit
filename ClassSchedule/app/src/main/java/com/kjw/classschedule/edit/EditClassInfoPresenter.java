@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by jwkuang on 2016/9/18.
@@ -110,6 +111,18 @@ public class EditClassInfoPresenter implements IPresenter, AdapterView.OnItemSel
             mView.showToast(R.string.no_time);
             return;
         }
-
+        mInfo.name = name;
+        if(mInfo.startTime == null){
+            mInfo.startTime = Calendar.getInstance();
+        }
+        mInfo.startTime.set(1970, 1, 1, mCurrStartHour, mCurrStartMinute);
+        mInfo.duration = Integer.parseInt(duration);
+        mInfo.isTemp = false;
+        List<ClassInfo> list = mDataSource.getDataList(mDay);
+        if(mIndex >= 0){
+            list.remove(mIndex);
+        }
+        list.add(mInfo);
+        mView.close();
     }
 }

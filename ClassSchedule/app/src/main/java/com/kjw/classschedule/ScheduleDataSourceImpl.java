@@ -45,6 +45,7 @@ public class ScheduleDataSourceImpl implements ScheduleDataSource{
             if(!initData()){
                 return null;
             }
+            isDataReady.set(true);
         }
         if(mMainScheduleList != null){
             return mMainScheduleList.get(day);

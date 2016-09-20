@@ -75,4 +75,8 @@ public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         mView.openEditClassActivity(mCurrentDay, i);
     }
+
+    public void onResume(){
+        mView.updateList(mDataSource.getDataList(mCurrentDay));
+    }
 }
