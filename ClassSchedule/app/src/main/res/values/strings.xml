@@ -12,4 +12,7 @@
     <string name="duration">上课时长：</string>
     <string name="minute">分钟</string>
     <string name="type">课程类型：</string>
+    <string name="no_name">请输入学生姓名！</string>
+    <string name="no_time">请选择上课时间！</string>
+    <string name="no_duration">请输入上课时长！</string>
 </resources>

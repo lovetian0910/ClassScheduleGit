@@ -17,4 +17,15 @@ public class ClassInfo {
         startTime.set(Calendar.MINUTE, minute);
     }
 
+    public ClassInfo copy(){
+        ClassInfo result = new ClassInfo();
+        result.startTime = Calendar.getInstance();
+        result.startTime.setTime(startTime.getTime());
+        result.duration = duration;
+        result.name = name;
+        result.type = type;
+        result.isTemp = isTemp;
+        return result;
+    }
+
 }

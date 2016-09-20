@@ -5,4 +5,19 @@ package com.kjw.classschedule.edit;
  */
 public interface EditClassInfoView {
     void initViews();
+
+    void openTimePicker(int hour, int minute);
+
+    void updateTime(String time);
+
+    void setName(String name);
+
+    void setType(int type);
+
+    void setDuration(int duration);
+
+    void showToast(int stringRes);
+
+    String getName();
+    String getDuration();
 }
