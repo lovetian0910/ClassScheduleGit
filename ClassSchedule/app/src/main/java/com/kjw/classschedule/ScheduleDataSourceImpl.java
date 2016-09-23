@@ -75,6 +75,31 @@ public class ScheduleDataSourceImpl implements ScheduleDataSource{
         return false;
     }
 
+    @Override
+    public int saveMainData() {
+        if(mMainScheduleList == null || mMainScheduleList.isEmpty()){
+            return Constants.SAVE_CLASS_RESULT_EMPTY;
+        }
+        try{
+            JSONObject obj = new JSONObject();
+            for(int i=0; i<Constants.DAYS.length; i++){
+                JSONObject dayObject = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                List<ClassInfo> dayList = mMainScheduleList.get(i);
+                for(ClassInfo info : dayList){
+                    jsonArray.put(info.toJSONObject());
+                }
+                dayObject.put("class", jsonArray);
+                obj.put(Constants.DAYS[i], dayObject);
+            }
+            FileUtil.writeString2File(MAIN_SCHEDULE_FILE_PATH, obj.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+            return Constants.SAVE_CLASS_RESULT_FAIL;
+        }
+        return Constants.SAVE_CLASS_RESULT_SUCCESS;
+    }
+
 
     private boolean initData(){
         mMainScheduleList = new HashMap<>();

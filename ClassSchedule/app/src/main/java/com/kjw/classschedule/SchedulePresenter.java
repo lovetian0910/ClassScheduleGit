@@ -5,6 +5,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 
 import com.kjw.classschedule.util.Constants;
+import com.kjw.classschedule.util.ThreadUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,8 +27,7 @@ public class SchedulePresenter implements IPresenter{
     private Handler mFileHandler;
     private Handler mUIHandler;
     public SchedulePresenter(ScheduleView view){
-        mFileThread = new HandlerThread("file");
-        mFileThread.start();
+        mFileThread = ThreadUtil.getFileThread();
         mFileHandler = new Handler(mFileThread.getLooper());
         mUIHandler = new Handler(Looper.getMainLooper());
         mView = view;
@@ -166,6 +166,11 @@ public class SchedulePresenter implements IPresenter{
 
     @Override
     public void onDestroy() {
+        mUIHandler.removeCallbacksAndMessages(null);
+        mUIHandler = null;
+        mFileHandler.removeCallbacksAndMessages(null);
+        mFileHandler = null;
+        ThreadUtil.stopFileThread();
         mDataSource.onDestroy();
     }
 }

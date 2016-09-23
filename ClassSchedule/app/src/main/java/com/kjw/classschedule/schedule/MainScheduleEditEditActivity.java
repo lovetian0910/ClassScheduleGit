@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kjw.classschedule.ClassInfo;
 import com.kjw.classschedule.ClassListAdapter;
@@ -95,5 +96,16 @@ public class MainScheduleEditEditActivity extends AppCompatActivity implements S
         intent.putExtra("day", day);
         intent.putExtra("index", index);
         startActivity(intent);
+    }
+
+    @Override
+    public void saveSuccess() {
+        Toast.makeText(this, R.string.save_success, Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public void showToast(int stringID) {
+        Toast.makeText(this, stringID, Toast.LENGTH_SHORT).show();
     }
 }

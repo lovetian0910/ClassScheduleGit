@@ -1,5 +1,7 @@
 package com.kjw.classschedule.schedule;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -8,6 +10,8 @@ import com.kjw.classschedule.IPresenter;
 import com.kjw.classschedule.R;
 import com.kjw.classschedule.ScheduleDataSource;
 import com.kjw.classschedule.ScheduleDataSourceImpl;
+import com.kjw.classschedule.util.Constants;
+import com.kjw.classschedule.util.ThreadUtil;
 
 import java.util.List;
 
@@ -19,9 +23,13 @@ public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.
     private ScheduleDataSource mDataSource;
     private ScheduleEditView mView;
     private int mCurrentDay;
+    private Handler mFileHandler;
+    private Handler mUIHandler;
     public ScheduleEditPresenter(ScheduleEditView view){
         mView = view;
         mDataSource = ScheduleDataSourceImpl.getInstance();
+        mFileHandler = new Handler(ThreadUtil.getFileThread().getLooper());
+        mUIHandler = new Handler(Looper.getMainLooper());
     }
 
     public void init(){
@@ -45,8 +53,10 @@ public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.
                 mView.changeDay(mCurrentDay);
                 break;
             case R.id.edit_add_class:
+                mView.openEditClassActivity(mCurrentDay, -1);
                 break;
             case R.id.edit_save:
+                saveAllClass();
                 break;
             default:
                 break;
@@ -78,5 +88,32 @@ public class ScheduleEditPresenter implements View.OnClickListener, AdapterView.
 
     public void onResume(){
         mView.updateList(mDataSource.getDataList(mCurrentDay));
+    }
+
+    private void saveAllClass(){
+        mFileHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                final int result = mDataSource.saveMainData();
+                mUIHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        switch (result){
+                            case Constants.SAVE_CLASS_RESULT_SUCCESS:
+                                mView.saveSuccess();
+                                break;
+                            case Constants.SAVE_CLASS_RESULT_EMPTY:
+                                mView.showToast(R.string.save_empty);
+                                break;
+                            case Constants.SAVE_CLASS_RESULT_FAIL:
+                                mView.showToast(R.string.save_fail);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+            }
+        });
     }
 }

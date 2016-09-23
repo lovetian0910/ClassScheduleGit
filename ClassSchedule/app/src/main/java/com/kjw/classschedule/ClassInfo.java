@@ -1,5 +1,7 @@
 package com.kjw.classschedule;
 
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 /**
@@ -26,6 +28,16 @@ public class ClassInfo {
         result.type = type;
         result.isTemp = isTemp;
         return result;
+    }
+
+    public JSONObject toJSONObject() throws Exception{
+        JSONObject classObj = new JSONObject();
+        classObj.put("startTime", startTime.getTimeInMillis());
+        classObj.put("duration", duration);
+        classObj.put("name", name);
+        classObj.put("type", type);
+        classObj.put("isTemp", isTemp ? 1 : 0);
+        return classObj;
     }
 
 }

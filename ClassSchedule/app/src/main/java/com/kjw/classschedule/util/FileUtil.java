@@ -41,31 +41,20 @@ public class FileUtil {
         return null;
     }
 
-    public static void writeString2File(String filename, String content){
+    public static void writeString2File(String filename, String content) throws Exception{
         BufferedWriter bw = null;
-        try {
-            File file = new File(filename);
-            File dir = new File(file.getParent());
-            if(!dir.exists()){
-                dir.mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            bw = new BufferedWriter(fw);
-            bw.write(content);
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally {
-            if(bw != null){
-                try{
-                    bw.close();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
+        File file = new File(filename);
+        File dir = new File(file.getParent());
+        if(!dir.exists()){
+            dir.mkdirs();
         }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        bw = new BufferedWriter(fw);
+        bw.write(content);
+        bw.close();
     }
 }

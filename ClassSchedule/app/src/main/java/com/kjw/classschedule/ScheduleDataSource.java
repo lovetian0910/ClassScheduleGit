@@ -16,5 +16,7 @@ public interface ScheduleDataSource {
 
     boolean setMainData(ArrayList<ClassInfo> dataList);
 
+    int saveMainData();
+
     void onDestroy();
 }

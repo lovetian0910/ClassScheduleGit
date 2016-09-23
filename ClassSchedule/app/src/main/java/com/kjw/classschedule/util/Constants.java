@@ -9,4 +9,8 @@ public class Constants {
     public static String[] DAYS = {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday" };
 
     public  static String[] DAYS_IN_CHN = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+
+    public static final int SAVE_CLASS_RESULT_SUCCESS = 1000;
+    public static final int SAVE_CLASS_RESULT_EMPTY = 1001;
+    public static final int SAVE_CLASS_RESULT_FAIL = 1002;
 }
